@@ -1,0 +1,850 @@
+/* ---------- Palette (taken from last year's flier) ---------- */
+:root {
+  --red-dark: #5e120d;
+  --red: #7f1d14;
+  --red-light: #9e2b1e;
+  --gold: #f4c542;
+  --gold-soft: #f8d873;
+  --cream: #fbefd5;
+  --brown: #4a1a0c;
+
+  --font-display: "Merienda", cursive;
+  --font-body: "Nunito", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, var(--red-dark) 0%, var(--red) 60%, var(--red-light) 100%);
+  min-height: 100vh;
+  color: var(--cream);
+  /* keeps the footer at the bottom on short pages */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Festive background ---------- */
+/* faint scattered icons: snowflakes, trees, presents, baubles... */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("images/pattern.svg") 0 0 / 360px 360px repeat;
+  opacity: 0.12;
+}
+
+/* gently falling snow (two sizes of flake drifting at the same pace) */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -600px;
+  height: calc(100% + 600px);
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 15%, var(--cream), transparent),
+    radial-gradient(1px 1px at 35% 40%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 60% 10%, var(--cream), transparent),
+    radial-gradient(1px 1px at 85% 55%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 25% 80%, var(--cream), transparent),
+    radial-gradient(1px 1px at 75% 90%, var(--cream), transparent),
+    radial-gradient(2.5px 2.5px at 15% 30%, var(--cream), transparent),
+    radial-gradient(2px 2px at 55% 65%, var(--cream), transparent),
+    radial-gradient(2.5px 2.5px at 90% 20%, var(--cream), transparent);
+  background-size:
+    300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px,
+    600px 600px, 600px 600px, 600px 600px;
+  opacity: 0.35;
+  animation: snowfall 40s linear infinite;
+}
+
+@keyframes snowfall {
+  from { transform: translateY(0); }
+  to   { transform: translateY(600px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
+  }
+}
+
+/* keep page content above the background layers */
+main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, var(--red-dark), var(--red));
+  border-bottom: 4px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Starry sky (two layers that twinkle out of sync) ---------- */
+.navbar::before,
+.navbar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+.navbar::before {
+  background-image:
+    radial-gradient(1px 1px at 3% 22%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 7% 78%, var(--cream), transparent),
+    radial-gradient(1px 1px at 11% 45%, var(--cream), transparent),
+    radial-gradient(2px 2px at 16% 15%, var(--gold-soft), transparent),
+    radial-gradient(1px 1px at 19% 62%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 24% 85%, var(--cream), transparent),
+    radial-gradient(1px 1px at 28% 30%, var(--cream), transparent),
+    radial-gradient(1px 1px at 33% 70%, var(--cream), transparent),
+    radial-gradient(2px 2px at 37% 20%, var(--cream), transparent),
+    radial-gradient(1px 1px at 41% 52%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 45% 88%, var(--gold-soft), transparent),
+    radial-gradient(1px 1px at 49% 35%, var(--cream), transparent),
+    radial-gradient(1px 1px at 53% 12%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 57% 66%, var(--cream), transparent),
+    radial-gradient(1px 1px at 61% 28%, var(--cream), transparent),
+    radial-gradient(2px 2px at 65% 80%, var(--cream), transparent),
+    radial-gradient(1px 1px at 69% 48%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 73% 14%, var(--gold-soft), transparent),
+    radial-gradient(1px 1px at 77% 72%, var(--cream), transparent),
+    radial-gradient(1px 1px at 81% 40%, var(--cream), transparent),
+    radial-gradient(2px 2px at 85% 90%, var(--cream), transparent),
+    radial-gradient(1px 1px at 89% 18%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 93% 58%, var(--cream), transparent),
+    radial-gradient(1px 1px at 97% 32%, var(--cream), transparent);
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+}
+
+.navbar::after {
+  background-image:
+    radial-gradient(1px 1px at 2% 55%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 9% 10%, var(--cream), transparent),
+    radial-gradient(1px 1px at 14% 92%, var(--cream), transparent),
+    radial-gradient(1px 1px at 21% 38%, var(--gold-soft), transparent),
+    radial-gradient(2px 2px at 26% 8%, var(--cream), transparent),
+    radial-gradient(1px 1px at 31% 50%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 35% 92%, var(--cream), transparent),
+    radial-gradient(1px 1px at 39% 5%, var(--cream), transparent),
+    radial-gradient(1px 1px at 43% 75%, var(--cream), transparent),
+    radial-gradient(2px 2px at 47% 42%, var(--gold-soft), transparent),
+    radial-gradient(1px 1px at 51% 82%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 55% 25%, var(--cream), transparent),
+    radial-gradient(1px 1px at 59% 90%, var(--cream), transparent),
+    radial-gradient(1px 1px at 63% 8%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 67% 55%, var(--cream), transparent),
+    radial-gradient(1px 1px at 71% 30%, var(--cream), transparent),
+    radial-gradient(2px 2px at 75% 92%, var(--cream), transparent),
+    radial-gradient(1px 1px at 79% 6%, var(--gold-soft), transparent),
+    radial-gradient(1px 1px at 83% 62%, var(--cream), transparent),
+    radial-gradient(1.5px 1.5px at 87% 28%, var(--cream), transparent),
+    radial-gradient(1px 1px at 91% 84%, var(--cream), transparent),
+    radial-gradient(2px 2px at 95% 12%, var(--cream), transparent),
+    radial-gradient(1px 1px at 99% 68%, var(--cream), transparent);
+  animation: twinkle 4.5s ease-in-out 1.75s infinite alternate-reverse;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.25; }
+  to   { opacity: 0.95; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar::before,
+  .navbar::after {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+.nav-container {
+  position: relative;
+  z-index: 1; /* keep content above the stars */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Brand (far left) */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--cream);
+}
+
+.brand-santa {
+  flex-shrink: 0;
+  height: 3.5rem;
+  width: auto;
+  /* soft golden glow so the red suit stands out against the red bar */
+  filter: drop-shadow(0 0 6px rgba(244, 197, 66, 0.55));
+  transition: transform 0.3s;
+}
+
+.brand:hover .brand-santa {
+  transform: rotate(-6deg) scale(1.06);
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Links (right side) */
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--cream);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible {
+  background-color: rgba(244, 197, 66, 0.15);
+  color: var(--gold-soft);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.nav-links a.active {
+  background-color: var(--gold);
+  color: var(--brown);
+  box-shadow: 0 2px 10px rgba(244, 197, 66, 0.4);
+}
+
+/* Hamburger (mobile only) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.6rem;
+  background: none;
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gold);
+  transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .nav-container {
+    flex-wrap: wrap;
+    padding: 0.85rem 1.25rem;
+  }
+
+  .brand-text {
+    font-size: 1.15rem;
+  }
+
+  .brand-santa {
+    height: 2.75rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(244, 197, 66, 0.3);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    text-align: center;
+    padding: 0.75rem;
+  }
+}
+
+/* ==========================================================
+   Shared page building blocks
+   ========================================================== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.eyebrow {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ==========================================================
+   About section
+   ========================================================== */
+.about {
+  padding: 5rem 0 6rem;
+}
+
+.about p {
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.about p:last-child {
+  margin-bottom: 0;
+}
+
+/* Header */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.section-header h1 {
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  margin: 0.6rem 0 1rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+  font-size: 1.25rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.divider::after {
+  transform: scaleX(-1);
+}
+
+.lead {
+  font-size: 1.2rem;
+}
+
+/* Our story */
+.story {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story h2 {
+  font-size: 1.75rem;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+
+/* ---------- About: responsive ---------- */
+@media (max-width: 860px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .about {
+    padding: 3rem 0 4rem;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+}
+
+/* ==========================================================
+   Future Events + Vendors
+   ========================================================== */
+.highlights {
+  padding: 0 0 6rem;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(40, 6, 4, 0.35);
+  border: 2px solid rgba(244, 197, 66, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 24px rgba(244, 197, 66, 0.25);
+}
+
+.feature-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-bottom: 4px solid var(--gold);
+}
+
+.feature-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.feature-card:hover .feature-image img {
+  transform: scale(1.06);
+}
+
+.feature-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: 2rem;
+}
+
+.feature-body h2 {
+  font-size: 1.9rem;
+  color: var(--cream);
+  margin: 0.4rem 0 0.9rem;
+}
+
+.feature-body p:not(.eyebrow) {
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  margin-top: auto; /* keeps both buttons lined up at the bottom */
+  display: inline-block;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--brown);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(244, 197, 66, 0.35);
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--gold-soft);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  .feature-image img {
+    transition: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .highlights {
+    padding-bottom: 4rem;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-body {
+    padding: 1.5rem;
+  }
+}
+
+/* ==========================================================
+   Future Events page
+   ========================================================== */
+.event-details {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.event-details li {
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(40, 6, 4, 0.35);
+  border: 2px solid rgba(244, 197, 66, 0.35);
+}
+
+.event-details .eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.event-details strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.story + .story {
+  margin-top: 3.5rem;
+}
+
+.vendor-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+.vendor-list li {
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: rgba(244, 197, 66, 0.12);
+  border: 1px solid rgba(244, 197, 66, 0.45);
+}
+
+@media (max-width: 860px) {
+  .event-details {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+.site-footer {
+  position: relative;
+  z-index: 1; /* keep above the background layers */
+  padding: 2rem 0;
+  text-align: center;
+  background: var(--red-dark);
+  border-top: 4px solid var(--gold);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.site-footer a {
+  color: var(--gold-soft);
+  text-decoration: none;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  text-decoration: underline;
+}
+
+.site-footer span {
+  margin: 0 0.5rem;
+  color: var(--gold);
+}
+
+/* ==========================================================
+   Vendors page
+   ========================================================== */
+.vendors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.vendor-card {
+  width: 320px;
+  max-width: 100%;
+}
+
+.vendor-card .feature-body {
+  align-items: center;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.vendor-card .feature-body h2 {
+  font-size: 1.4rem;
+}
+
+/* ==========================================================
+   Past Events page
+   ========================================================== */
+/* each photo's width follows its shape, so rows fill the page without cropping */
+.gallery {
+  --row-height: 260px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* stops the last row stretching to full width */
+.gallery::after {
+  content: "";
+  flex-grow: 999;
+}
+
+.gallery-item {
+  flex: calc(var(--ar) * 100) 1 calc(var(--ar) * var(--row-height));
+  aspect-ratio: var(--ar);
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid rgba(244, 197, 66, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s, border-color 0.25s;
+}
+
+.gallery-item:hover,
+.gallery-item:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  outline: none;
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Full-size photo viewer */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: none;
+  background: rgba(20, 3, 2, 0.94);
+  color: var(--cream);
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image {
+  display: block;
+  max-width: calc(100vw - 10rem);
+  max-height: calc(100vh - 2rem);
+  border-radius: 10px;
+}
+
+.lightbox-btn {
+  position: absolute;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: rgba(40, 6, 4, 0.7);
+  color: var(--gold);
+  font-size: 1.9rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.lightbox-btn:hover,
+.lightbox-btn:focus-visible {
+  background: var(--gold);
+  color: var(--brown);
+  outline: none;
+}
+
+.lightbox-close { top: 1rem; right: 1rem; }
+.lightbox-prev { left: 1rem; top: calc(50% - 1.5rem); }
+.lightbox-next { right: 1rem; top: calc(50% - 1.5rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item,
+  .gallery-item img {
+    transition: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .gallery {
+    --row-height: 150px;
+    gap: 0.5rem;
+  }
+
+  .lightbox-image {
+    max-width: calc(100vw - 1rem);
+    max-height: calc(100vh - 9rem);
+  }
+
+  /* arrows move below the photo so they don't cover it */
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 1rem;
+  }
+
+  .lightbox-prev { left: calc(50% - 4rem); }
+  .lightbox-next { right: calc(50% - 4rem); }
+}
+
+/* ==========================================================
+   Past Events carousel
+   ========================================================== */
+.past-events {
+  padding: 0 0 6rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  margin: 0.6rem 0 1rem;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.past-events .section-header {
+  margin-bottom: 3rem;
+}
+
+.carousel {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  border-radius: 20px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(244, 197, 66, 0.2);
+  background: var(--red-dark);
+}
+
+.carousel-track {
+  list-style: none;
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+/* blurred copy of the photo fills the space around portrait shots */
+.slide::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: var(--bg) center / cover no-repeat;
+  filter: blur(22px) brightness(0.55);
+}
+
+.slide img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+.past-cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    transition: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .past-events {
+    padding-bottom: 4rem;
+  }
+
+  .slide {
+    aspect-ratio: 4 / 5;
+  }
+}

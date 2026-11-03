@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="360" viewBox="0 0 360 360">
+  <defs>
+    <g id="snowflake">
+      <path d="M12 2v20M3.3 7l17.4 10M3.3 17l17.4-10"/>
+      <path d="M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3.6 10.2l3.3-1-.8-3.4M20.4 13.8l-3.3 1 .8 3.4M3.6 13.8l3.3 1-.8 3.4M20.4 10.2l-3.3-1 .8-3.4"/>
+    </g>
+    <g id="tree">
+      <path d="M12 2 7 9h3l-4 6h4l-4 5h12l-4-5h4l-4-6h3z"/>
+      <path d="M10.5 20v3h3v-3"/>
+    </g>
+    <g id="present">
+      <rect x="3" y="9" width="18" height="12" rx="1"/>
+      <path d="M3 13h18M12 9v12"/>
+      <path d="M12 9c-2-4-6-4-6-1.5S9.5 9 12 9c2.5 0 6 1 6-1.5S14 5 12 9"/>
+    </g>
+    <g id="bauble">
+      <circle cx="12" cy="14" r="7"/>
+      <path d="M10 7h4V5h-4zM12 5V3"/>
+      <path d="M6 13c3 2 9 2 12 0"/>
+    </g>
+    <g id="star">
+      <path d="M12 2.5l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.7 6.2 20l1.4-6.4L2.7 9.2l6.5-.7z"/>
+    </g>
+    <g id="candycane">
+      <path d="M14 22V8a4 4 0 1 0-8 0"/>
+      <path d="M12.5 12l3-1.5M12.5 16.5l3-1.5M12.5 21l3-1.5"/>
+    </g>
+    <g id="holly">
+      <path d="M12 12c-2-3-6-3-8-1 1 0 2 1 1.5 2.5C7 13 9 13.5 12 12zM12 12c2-3 6-3 8-1-1 0-2 1-1.5 2.5C17 13 15 13.5 12 12z"/>
+      <circle cx="12" cy="10" r="1.4"/>
+      <circle cx="10" cy="8.6" r="1.2"/>
+      <circle cx="14" cy="8.6" r="1.2"/>
+    </g>
+    <g id="bell">
+      <path d="M6 17v-6a6 6 0 0 1 12 0v6l1.5 2h-15z"/>
+      <path d="M10 21a2 2 0 0 0 4 0M12 5V3"/>
+    </g>
+  </defs>
+
+  <g fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- cream icons -->
+    <g stroke="#fbefd5">
+      <use xlink:href="#snowflake" transform="translate(18 22)"/>
+      <use xlink:href="#present"   transform="translate(286 18) scale(.9) rotate(-8 12 12)"/>
+      <use xlink:href="#snowflake" transform="translate(222 122) scale(.7)"/>
+      <use xlink:href="#holly"     transform="translate(28 228)"/>
+      <use xlink:href="#bell"      transform="translate(168 206) scale(.85) rotate(-10 12 12)"/>
+      <use xlink:href="#candycane" transform="translate(272 248) rotate(12 12 12)"/>
+      <use xlink:href="#snowflake" transform="translate(108 300) scale(.8)"/>
+      <use xlink:href="#tree"      transform="translate(330 318) scale(.8)"/>
+    </g>
+    <!-- gold icons -->
+    <g stroke="#f4c542">
+      <use xlink:href="#tree"      transform="translate(148 38) scale(1.1)"/>
+      <use xlink:href="#bauble"    transform="translate(78 128) scale(.9) rotate(10 12 12)"/>
+      <use xlink:href="#star"      transform="translate(328 148) scale(.7)"/>
+      <use xlink:href="#present"   transform="translate(208 314) scale(.8) rotate(6 12 12)"/>
+    </g>
+  </g>
+
+  <!-- tiny dots of snow between the icons -->
+  <g fill="#fbefd5">
+    <circle cx="96"  cy="40"  r="1.2"/>
+    <circle cx="246" cy="64"  r="1"/>
+    <circle cx="20"  cy="160" r="1"/>
+    <circle cx="150" cy="150" r="1.3"/>
+    <circle cx="300" cy="96"  r="1"/>
+    <circle cx="200" cy="260" r="1.1"/>
+    <circle cx="70"  cy="270" r="1"/>
+    <circle cx="340" cy="230" r="1.2"/>
+    <circle cx="260" cy="190" r="1"/>
+    <circle cx="10"  cy="340" r="1"/>
+  </g>
+</svg>
