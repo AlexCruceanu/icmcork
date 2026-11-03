@@ -406,6 +406,35 @@ h1, h2 {
   margin-bottom: 1.25rem;
 }
 
+/* Lead partner banner */
+.partner-banner {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  border-radius: 20px;
+  background: var(--gold);
+  color: var(--red-dark);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  outline: 2px dashed var(--gold);
+  outline-offset: 6px;
+}
+
+.partner-banner .eyebrow {
+  color: var(--red);
+}
+
+.partner-banner h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin: 0.4rem 0 0.5rem;
+}
+
+.about .partner-banner .partner-years {
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
 /* ---------- About: responsive ---------- */
 @media (max-width: 860px) {
   .container {
@@ -418,6 +447,11 @@ h1, h2 {
 
   .section-header {
     margin-bottom: 3rem;
+  }
+
+  .partner-banner {
+    margin-bottom: 3rem;
+    padding: 1.75rem 1.25rem;
   }
 }
 
